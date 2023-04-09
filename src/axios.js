@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://forlens.netlify.app/api/api/';
+const baseURL = 'http://bawermy.pythonanywhere.com//api/';
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,

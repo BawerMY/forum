@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://forlens.netlify.app/api/';
+const baseURL = 'https://forlens.netlify.app/api/api/';
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,

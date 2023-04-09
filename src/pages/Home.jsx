@@ -19,6 +19,7 @@ export default function Home(props) {
     return (
         <div>
             <Link to='/chats'><button>Chats(click)</button></Link>
+            <Link to='/login'><button>Login(click)</button></Link>
         </div>
     )
 }

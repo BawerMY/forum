@@ -33,7 +33,7 @@ export default function App() {
       }
     }, [])
   return (
-    <>
+    <Router>
         {/* <nav className="flex items-center h-[90px]">
           <div className="flex items-center">
             <img className="h-9" src="imgs\logo+name.svg" alt="ForLens" />
@@ -57,7 +57,7 @@ export default function App() {
           <Route path="/questions" element={<Questions />} />
           <Route path="/welcome" element={<Welcome />} />
         </Routes>
-    </>
+    </Router>
   );
 }
 

@@ -1,7 +1,5 @@
 import axios from 'axios';
-
 const baseURL = 'https://bawermy.pythonanywhere.com/api/';
-
 const axiosInstance = axios.create({
 	baseURL: baseURL,
 	timeout: 5000,

@@ -13,11 +13,11 @@ import Home from "./pages/Home";
 import ChatSection from "./pages/ChatSection";
 import Questions from "./pages/Questions";
 import Welcome from "./pages/Welcome";
-
 import SearchInput from "./components/SearchInput";
 
 import axiosInstance from "./axios";
 import Chat from "./pages/Chat";
+import Logout from "./pages/Logout";
 
 export default function App() {
   const [data, setData] = useState(null)
@@ -56,6 +56,7 @@ export default function App() {
           </Route>
           <Route path="/questions" element={<Questions />} />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
     </Router>
   );

@@ -13,7 +13,7 @@ export default function ChatSection(props) {
     return (
         <div className="flex flex-col items-center pt-4 gap-1">
             {chats&&chats.map((chat) => <div className="flex flex-col" key={chat.id}>
-                <Link to={'/chats/'+chat.id}><Answer username={chat.name} message={chat.description} answer={props.user&&chat.user===props.user.username} /></Link>
+                <Link to={'/chats/'+chat.id+'#last-msg'}><Answer username={chat.name} message={chat.description} answer={props.user&&chat.user===props.user.username} /></Link>
             </div>)}
         </div>
     )

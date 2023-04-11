@@ -1,12 +1,16 @@
 import Button from '../components/Button'
 import axiosInstance from '../axios'
-import { Link, redirect } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 export default function Login() {
+  useEffect(() => {
+    localStorage.clear()
+}, [])
+const [r, setR] = useState(false)
     var username = ''
     var password = ''
     return (
-        <form action='#' onSubmit={() => {
-          if(!localStorage.getItem('access_token')) {
+        <form action='javascript:void(0)' onSubmit={() => {
             axiosInstance
             .post(
               "token/", {username: username, password: password}
@@ -16,11 +20,8 @@ export default function Login() {
               axiosInstance.defaults.headers['Autorization'] =
               "JWT " + localStorage.getItem("access_token")
             })
+            setR(true)
             console.log('logged in')
-          }
-          else {
-            console.log('already logged in')
-          }
         }} className="rounded-[4px] fixed left-[50vw] top-[50vh] -translate-x-1/2 -translate-y-1/2 border-[#CCCCCC] w-[312px] pt-5 border-2 flex pb-[11px] flex-col items-center px-[11px]">
             <h3 className="text-[21px] text-center">Effettua il login</h3>
             <label className="text-[20px] w-full ml-[17px] mt-[14px]" htmlFor="username">Username</label>
@@ -31,6 +32,7 @@ export default function Login() {
                 <Button type="submit" text='Login' color='#367FFF' />
                 <span className='mt-[11px]'>Non hai un account? <Link to='/register' className='text-[#367FFF]'>Registrati</Link></span>
             </div>
+            {r&&<Navigate to='/chats' />}
         </form>
     )
 }

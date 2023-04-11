@@ -4,6 +4,7 @@ import axiosInstance from "../axios";
 import { Link, useParams } from "react-router-dom";
 import Answer from "../components/Answer";
 export default function Chat(props) {
+    const [title, setTitle] = useState()
     const [loadNr, setLoadNr] = useState(20)
     const { chatId } = useParams()
     const [msgs, setMsgs] = useState([])
@@ -11,7 +12,7 @@ export default function Chat(props) {
         axiosInstance
         .get(
         "chats/"+chatId,
-        ).then(function(request) {request.data[0].messages!==msgs&&setMsgs(request.data[0].messages)})
+        ).then(function(request) {request.data[0].messages!==msgs&&setMsgs(request.data[0].messages); setTitle(request.data[0].name)})
         .catch(function(error) {console.log(error)})
     },[])
     useEffect(() => {
@@ -29,9 +30,11 @@ export default function Chat(props) {
         if(document.getElementById('msg')) document.getElementById('msg').focus()
     }, [msgs.length])
     return (
+        <>
+        <div className="text-[24px] text-center whitespace-nowrap">{title}</div>
         <div className="flex py-4 px-4 justify-center">
             <div className="border-2 border-[#CCCCCC50] rounded-[4px] w-[900px]">
-                <ul className="flex flex-col px-[1vw] h-[calc(100vh-149px)] gap-1 overflow-auto">
+                <ul className="flex flex-col px-[1vw] h-[calc(100vh-149px-56px-36px)] gap-1 overflow-auto">
                     <button onClick={() => {loadNr<msgs.length&&setLoadNr(loadNr+20)}} className="text-center border-b-2 border-[#CCCCCC50] py-2">{loadNr<msgs.length?'Load +20 (may decrase the fluency)':'beginning of this chat'}</button>
                     {msgs.slice(-loadNr).map((msg) => <li key={msg.id} className={props.user&&msg.user===props.user.username?"ml-auto":'mr-auto'}><Message username={msg.user} bg={props.user&&msg.user===props.user.username?'#E7EFFF':"#ffffff"} message={msg.message} /></li>)}
                     <li id="last-msg"></li>
@@ -63,5 +66,6 @@ export default function Chat(props) {
           </div>
             </div>
         </div>
+        </>
     )
 }

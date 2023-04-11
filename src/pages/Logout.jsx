@@ -6,7 +6,7 @@ export default function Logout() {
     }, [])
     return (
         <div>
-            logged out <Link className="text-blue-600" to='/login'>Login</Link>
+            logged out <Link className="text-blue-600" to='/login'>Login</Link> <Link to='/register'>Register</Link>
         </div>
     )
 }

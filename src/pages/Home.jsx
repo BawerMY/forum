@@ -6,20 +6,19 @@ import UserCard from '../components/UserCard'
 
 import axiosInstance from "../axios"
 import { Link } from "react-router-dom"
-import { useEffect } from "react"
-import { redirect } from "react-router-dom"
-import Button from "../components/Button"
-import ChatSection from "./ChatSection"
+import { useEffect, useState } from "react"
+import { Navigate } from "react-router-dom"
 export default function Home(props) {
+    const [me, setMe] = useState(null)
     useEffect(() => {
         axiosInstance
             .get("me/")
-            .then(function(request) {console.log(request.data)})
+            .then(function(request) {setMe(request.data)})
     }, [])
     return (
         <div>
-            <Link to='/chats'><button>Chats(click)</button></Link>
-            <Link to='/login'><button>Login(click)</button></Link>
+            {me&&<Navigate to='/chats' />}
+            <Link to='/register' className="text-[128px] fixed top-[50vh] left-[50vw] -translate-x-[50%] -translate-y-[50%]">Welcome</Link>
         </div>
     )
 }

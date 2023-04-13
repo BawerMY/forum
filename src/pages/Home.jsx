@@ -10,15 +10,16 @@ import { useEffect, useState } from "react"
 import { Navigate } from "react-router-dom"
 export default function Home(props) {
     const [me, setMe] = useState(null)
+    const [welcome, setWelocome] = useState(null)
     useEffect(() => {
         axiosInstance
             .get("me/")
-            .then(function(request) {setMe(request.data)})
+            .then(function(request) {setMe(request.data); setWelocome('Welcome')})
     }, [])
     return (
         <div>
             {me&&<Navigate to='/chats' />}
-            <Link to='/register' className="text-[128px] fixed top-[50vh] left-[50vw] -translate-x-[50%] -translate-y-[50%]">Welcome</Link>
+            <Link to='/register' className="text-[15vw] fixed top-[50vh] left-[50vw] -translate-x-[50%] -translate-y-[50%]">Welcome</Link>
         </div>
     )
 }

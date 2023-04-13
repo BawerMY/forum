@@ -3,8 +3,15 @@ import Message from "../components/Message";
 import axiosInstance from "../axios";
 import { Link, useParams } from "react-router-dom";
 import Answer from "../components/Answer";
-export default function Chat(props) {
-    const [title, setTitle] = useState()
+export default function Chat() {
+    const [user, setUser] = useState(null)
+    useEffect(() => {
+        axiosInstance
+            .get(
+                "me",
+            ).then(function(request) {setUser(request.data)})
+      }, [])
+    const [title, setTitle] = useState(null)
     const [loadNr, setLoadNr] = useState(20)
     const { chatId } = useParams()
     const [msgs, setMsgs] = useState([])
@@ -36,11 +43,11 @@ export default function Chat(props) {
             <div className="border-2 border-[#CCCCCC50] rounded-[4px] w-[900px]">
                 <ul className="flex flex-col px-[1vw] h-[calc(100vh-149px-56px-36px)] gap-1 overflow-auto">
                     <button onClick={() => {loadNr<msgs.length&&setLoadNr(loadNr+20)}} className="text-center border-b-2 border-[#CCCCCC50] py-2">{loadNr<msgs.length?'Load +20 (may decrase the fluency)':'beginning of this chat'}</button>
-                    {msgs.slice(-loadNr).map((msg) => <li key={msg.id} className={props.user&&msg.user===props.user.username?"ml-auto":'mr-auto'}><Message username={msg.user} bg={props.user&&msg.user===props.user.username?'#E7EFFF':"#ffffff"} message={msg.message} /></li>)}
+                    {msgs.slice(-loadNr).map((msg) => <li key={msg.id} className={user&&msg.user===user.username?"ml-auto":'mr-auto'}><Message username={msg.user} bg={user&&msg.user===user.username?'#E7EFFF':"#ffffff"} message={msg.message} /></li>)}
                     <li id="last-msg"></li>
                 </ul>
                 <div className="flex w-[900px] items-stretch max-w-[90vw] p-4">
-            {props.user?<><textarea className="rounded-l-[4px] flex-auto max-w-[90vw] py-1.5 px-2 border-2 border-[#CCCCCC50]" placeholder="scrivi un messaggio..." type="text" name="msg" id="msg" />
+            {user?<><textarea className="rounded-l-[4px] flex-auto max-w-[90vw] py-1.5 px-2 border-2 border-[#CCCCCC50]" placeholder="scrivi un messaggio..." type="text" name="msg" id="msg" />
             <button className="bg-amber-500 rounded-r-[4px] font-semibold text-white px-2" onClick={() => {
                 document.getElementById('msg').focus()
                 if(document.getElementById('msg').value.replace(' ', '')!=='') {

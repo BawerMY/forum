@@ -42,7 +42,7 @@ useEffect(() => {
     <Router>
         <nav className="flex items-center py-4 justify-between px-8">
           <Link onClick={() =>{/*!data&&localStorage.clear()*/}} to='/chats'>Chats</Link>
-          <div><Link to='/login'>Login</Link>/<Link to='/register'>Register</Link></div>
+          <div><Link to='/login'>Login/Logout</Link></div>
           {/* <div><Link to='/login'>{!data?"Login":"Logout"}</Link>{!data?"/":""}<Link to='/register'>{!data?"Register":""}</Link></div> */}
         </nav>
         <Routes>

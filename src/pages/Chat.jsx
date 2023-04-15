@@ -20,7 +20,11 @@ export default function Chat() {
         .get(
         "chats/"+chatId,
         ).then(function(request) {request.data[0].messages!==msgs&&setMsgs(request.data[0].messages); setTitle(request.data[0].name)})
-        .catch(function(error) {console.log(error)})
+        .catch(axiosInstance
+            .get(
+            "chats/"+chatId,
+            ).then(function(request) {request.data[0].messages!==msgs&&setMsgs(request.data[0].messages); setTitle(request.data[0].name)})
+            .catch(function(error) {console.log(error)}))
     },[])
     useEffect(() => {
         const interval = setInterval(() => {

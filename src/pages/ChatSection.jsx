@@ -32,7 +32,7 @@ export default function ChatSection(props) {
                 <div className="flex justify-end gap-1">
                     <Button text="Cancel" color="#cccccc" type="button" onClick={() => setCreate(false)} />
                     <Button text='Create' color='#367FFF' type='button' onClick={() => {
-                        if(name.replace(' ', '')==='') return
+                        // if(name.replace(' ', '')==='') return alert("Can't create a chat without name")
                         var d = [document.getElementById('name').value, document.getElementById('desc').value]
                         document.getElementById('name').value='';
                         document.getElementById('desc').value='';
@@ -47,7 +47,19 @@ export default function ChatSection(props) {
                             axiosInstance
                             .get("chats/")
                             .then(function(request) {setChats(request.data)})
-                        )
+                        ).catch(
+                            axiosInstance
+                        .post(
+                          "chats/", {
+                            name: d[0],
+                            description: d[1],
+                            type: "chat"
+                        }
+                        ).then(
+                            axiosInstance
+                            .get("chats/")
+                            .then(function(request) {setChats(request.data)})
+                        ))
                     }} />
                 </div>
             </div>

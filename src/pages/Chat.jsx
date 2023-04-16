@@ -6,10 +6,16 @@ import Answer from "../components/Answer";
 export default function Chat() {
     const [user, setUser] = useState(null)
     useEffect(() => {
+        setUser(null)
         axiosInstance
             .get(
-                "me",
+                "me/",
+            ).then(function(request) {setUser(request.data)}).then(
+                axiosInstance
+            .get(
+                "me/",
             ).then(function(request) {setUser(request.data)})
+            .catch(function() {setUser(null)}))
       }, [])
     const [title, setTitle] = useState(null)
     const [loadNr, setLoadNr] = useState(20)

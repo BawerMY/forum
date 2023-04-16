@@ -24,7 +24,7 @@ export default function ChatSection(props) {
                 <Link to={'/chats/'+chat.id+'#last-msg'}><Answer username={chat.name} message={chat.description} answer={user&&user===user.username} /></Link>
             </div>)}
 
-            {create?<div className={`flex flex-col gap-1 bg-[#ffffff] w-[610px] max-w-[90vw] justify-start rounded-[10px] p-2 pl-3 border-2 border-[#CCCCCC50]`}>
+            {user&&(create?<div className={`flex flex-col gap-1 bg-[#ffffff] w-[610px] max-w-[90vw] justify-start rounded-[10px] p-2 pl-3 border-2 border-[#CCCCCC50]`}>
                 <div className={`flex justify-between`}>
                     <input type="text" onChange={() => setName(document.getElementById('name').value)} name="name" id="name" className="text-2xl w-full" placeholder="new chat's name" />
                 </div>
@@ -67,7 +67,7 @@ export default function ChatSection(props) {
             <button onClick={() => setCreate(true)} className={`flex justify-center bg-[#ffffff] w-[610px] max-w-[90vw] rounded-[10px] p-2 pl-3 border-2 border-[#CCCCCC50]`}>
                 <h3 className="text-2xl">Create new chat</h3>
             </button>
-            }
+            )}
         </div>
     )
 }

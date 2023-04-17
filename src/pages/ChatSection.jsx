@@ -24,9 +24,9 @@ export default function ChatSection(props) {
 
             {user&&(create?<div className={`flex flex-col gap-1 bg-[#ffffff] w-[610px] max-w-[90vw] justify-start rounded-[10px] p-2 pl-3 border-2 border-[#CCCCCC50]`}>
                 <div className={`flex justify-between`}>
-                    <input type="text" onChange={() => setName(document.getElementById('name').value)} name="name" id="name" className="text-2xl w-full" placeholder="new chat's name" />
+                    <input type="text" name="name" id="name" className="text-2xl w-full" placeholder="new chat's name" />
                 </div>
-                <textarea id="desc" onChange={() => setDesc(document.getElementById('desc').value)} placeholder="new chat's description" ></textarea>
+                <textarea id="desc" placeholder="new chat's description" ></textarea>
                 <div className="flex justify-end gap-1">
                     <Button text="Cancel" color="#cccccc" type="button" onClick={() => setCreate(false)} />
                     <Button text='Create' color='#367FFF' type='button' onClick={() => {
@@ -45,19 +45,7 @@ export default function ChatSection(props) {
                             axiosInstance
                             .get("chats/")
                             .then(function(request) {setChats(request.data)})
-                        ).catch(
-                            axiosInstance
-                        .post(
-                          "chats/", {
-                            name: d[0],
-                            description: d[1],
-                            type: "chat"
-                        }
-                        ).then(
-                            axiosInstance
-                            .get("chats/")
-                            .then(function(request) {setChats(request.data)})
-                        ))
+                        )
                     }} />
                 </div>
             </div>

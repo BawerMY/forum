@@ -19,7 +19,7 @@ export default function Login() {
               axiosInstance.defaults.headers['Autorization'] =
               "JWT " + localStorage.getItem("access_token")
             })
-            window.location.href = "https://forlens.vercel.app/chats/"
+            // window.location.href = "https://forlens.vercel.app/chats/"
             console.log('logged in')
         }} className="rounded-[4px] fixed left-[50vw] top-[50vh] -translate-x-1/2 -translate-y-1/2 border-[#CCCCCC] w-[312px] pt-5 border-2 flex pb-[11px] flex-col items-center px-[11px]">
             <h3 className="text-[21px] text-center">Effettua il login</h3>

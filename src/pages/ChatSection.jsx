@@ -16,8 +16,6 @@ export default function ChatSection(props) {
                 "me/",
             ).then(function(request) {setUser(request.data)})
     }, [])
-    const [desc, setDesc] = useState(null)
-    const [name, setName] = useState(null)
     return (
         <div className="flex flex-col-reverse items-center pt-4 gap-1">
             {chats&&chats.map((chat) => <div className="flex flex-col" key={chat.id}>
@@ -34,8 +32,8 @@ export default function ChatSection(props) {
                     <Button text='Create' color='#367FFF' type='button' onClick={() => {
                         // if(name.replace(' ', '')==='') return alert("Can't create a chat without name")
                         var d = [document.getElementById('name').value, document.getElementById('desc').value]
-                        document.getElementById('name').value='';
-                        document.getElementById('desc').value='';
+                        document.getElementById('name').value=''
+                        document.getElementById('desc').value=''
                         axiosInstance
                         .post(
                           "chats/", {
